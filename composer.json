@@ -1,0 +1,14 @@
+{
+    "name": "joaopedrobaq/diffdatas",
+    "description": "Calculador de diferença entre datas que escreve em PT-br",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "João Pedro",
+            "email": "joaopedrobaqueiro@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
