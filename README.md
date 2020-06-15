@@ -9,7 +9,7 @@ composer require joaopedrobaq/diffdatas
 ## Como Usar
 No topo do arquivo, coloque:
 ```php
-require_once './vendor/autoload.php';
+require_once __DIR__ '/vendor/autoload.php';
 
 use DiffDatas\Datas;
 ```
@@ -132,6 +132,9 @@ echo($datas->escreverFuturo(true));
 // Retorna
 25/06 às 18:30
 ```
+## Contribuições
+
+Caso queira contribuir para o projeto, crie uma issue para que possamos discutir o bug ou possível adição ao repositório.
 
 ## License
 
