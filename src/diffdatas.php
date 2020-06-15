@@ -68,7 +68,7 @@ class Datas
     return $extenso;
   }
 
-  function escreverFuturo($as)
+  function escreverFuturo($as = false)
   {
     $fut = new \DateTime($this->data1);
     $atual = new \DateTime($this->agora);
