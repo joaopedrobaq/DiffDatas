@@ -2,10 +2,10 @@
 
 namespace DiffDatas;
 
-class DiffDatas
+class Datas
 {
-  private $datapassado;
-  private $datafuturo;
+  private $data1;
+  private $data2;
   private $diff;
   public $agora;
 
@@ -16,13 +16,13 @@ class DiffDatas
 
   function subDatas()
   {
-    $date1 = new \DateTime($this->datapassado);
-    $date2 = new \DateTime($this->datafuturo);
+    $date1 = new \DateTime($this->data1);
+    $date2 = new \DateTime($this->data2);
     $diff = date_diff($date1, $date2);
     $this->setDiff($diff);
   }
 
-  function escreverDiff()
+  function escreverSimples()
   {
     $tipos = ['y', 'm', 'd', 'h', 'i', 's'];
     $full = ['ano', 'mês', 'dia', 'hora', 'minuto', 'segundo'];
@@ -41,25 +41,58 @@ class DiffDatas
     }
   }
 
-  function mostrarFuturo()
+  function escreverExtenso()
   {
-    $fut = new \DateTime($this->datafuturo);
-    $dif = date_diff($this->agora, $fut);
+    $tipos = ['y', 'm', 'd', 'h', 'i', 's'];
+    $full = ['ano', 'mês', 'dia', 'hora', 'minuto', 'segundo'];
+    $fullp = ['anos', 'meses', 'dias', 'horas', 'minutos', 'segundos'];
+    foreach ($tipos as $i => $tipo) {
+      $dif = $this->diff->format("%$tipo");
+      if ($dif > 0) {
+        if ($dif === 1) {
+          $ext[] = $dif . " $full[$i]";
+        } else {
+          $ext[] = $dif . " $fullp[$i]";
+        }
+      }
+    }
+    $extenso = "";
+    for ($i = 0; $i < count($ext); $i++) {
+      $extenso .= "$ext[$i]";
+      if ($i < count($ext) - 2) {
+        $extenso .= ", ";
+      } elseif ($i < count($ext) - 1) {
+        $extenso .= " e ";
+      }
+    }
+    return $extenso;
+  }
+
+  function escreverFuturo($as)
+  {
+    $fut = new \DateTime($this->data1);
+    $atual = new \DateTime($this->agora);
+    $dif = date_diff($atual, $fut);
     $diasdif = $dif->format("%d");
-    $convert = strtotime($this->datafuturo);
+    $convert = strtotime($this->data1);
     $data = date("d/m", $convert);
     $diasem = date("l", $convert);
     $hora = date("H:i", $convert);
     if ($diasdif == 0) {
-      $datastr = "Hoje às ";
+      $datastr = "Hoje";
     } elseif ($diasdif == 1) {
-      $datastr = "Amanhã às ";
+      $datastr = "Amanhã";
     } elseif ($diasdif < 7 && $diasdif > 1) {
-      $datastr = $this->converterDia($diasem) . " às ";
+      $datastr = $this->converterDia($diasem);
     } else {
-      $datastr = $data . " às ";
+      $datastr = $data;
     }
-    return $data . $hora;
+    if ($as) {
+      $as = " às ";
+    } else {
+      $as = " ";
+    }
+    return $datastr . $as . $hora;
   }
 
   private function converterDia($dia)
@@ -89,13 +122,28 @@ class DiffDatas
     }
   }
 
-  public function setDataFuturo($datafuturo)
+  function arrayDiff()
   {
-    $this->datafuturo = $datafuturo;
+    // Converte Diferença em array
+
+    $tipos = ['y', 'm', 'd', 'h', 'i', 's'];
+    $full = ['anos', 'meses', 'dias', 'horas', 'minutos', 'segundos'];
+
+    for ($i = 0; $i < count($tipos); $i++) {
+      $prop = $tipos[$i];
+      $novo[$full[$i]] = $this->diff->$prop;
+    }
+
+    return $novo;
   }
-  public function setDataPassado($datapassado)
+
+  public function setData1($data1)
   {
-    $this->datapassado = $datapassado;
+    $this->data1 = $data1;
+  }
+  public function setData2($data2)
+  {
+    $this->data2 = $data2;
   }
   public function getDiff()
   {
