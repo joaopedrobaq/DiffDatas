@@ -5,12 +5,11 @@ Calculadora de Diferença de Datas em PHP
 O pacote pode ser instalado pelo composer:
 ```
 composer require joaopedrobaq/diffdatas
-
 ```
 ## Como Usar
 No topo do arquivo, coloque:
 ```php
-require_once __DIR__ . '/vendor/autoload.php';
+require_once './vendor/autoload.php';
 
 use DiffDatas\Datas;
 ```

@@ -32,7 +32,7 @@ class Datas
       $dif = $this->diff->format("%$tipo");
       if ($dif > 0 && $feito == false) {
         $feito = true;
-        if ($dif === 1) {
+        if ($dif == 1) {
           return $dif . " $full[$i]";
         } else {
           return $dif . " $fullp[$i]";
@@ -49,7 +49,7 @@ class Datas
     foreach ($tipos as $i => $tipo) {
       $dif = $this->diff->format("%$tipo");
       if ($dif > 0) {
-        if ($dif === 1) {
+        if ($dif == 1) {
           $ext[] = $dif . " $full[$i]";
         } else {
           $ext[] = $dif . " $fullp[$i]";
