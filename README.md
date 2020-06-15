@@ -9,7 +9,7 @@ composer require joaopedrobaq/diffdatas
 ## Como Usar
 No topo do arquivo, coloque:
 ```php
-require_once __DIR__ '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 use DiffDatas\Datas;
 ```
